@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skills | Rishank Rastogi</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css">
+    <style>
+        * { cursor: none !important; }
+        body { margin: 0; overflow-x: hidden; background-color: #050505; color: #e2e8f0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        html { scroll-behavior: smooth; }
+        #canvas-bg { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: -1; }
+        #cursor-dot { position: fixed; top: 0; left: 0; width: 6px; height: 6px; background-color: #00ffcc; border-radius: 50%; z-index: 10000; pointer-events: none; transform: translate(-50%, -50%); box-shadow: 0 0 10px #00ffcc, 0 0 20px #00ffcc; }
+        #cursor-outline { position: fixed; top: 0; left: 0; width: 36px; height: 36px; border: 1.5px solid rgba(0, 255, 204, 0.4); border-radius: 50%; z-index: 9999; pointer-events: none; transform: translate(-50%, -50%); transition: width 0.25s, height 0.25s, background-color 0.25s; }
+        .hover-active { width: 60px !important; height: 60px !important; background-color: rgba(0, 255, 204, 0.08); border-color: #00ffcc !important; }
+        #loader { position: fixed; inset: 0; background: #050505; z-index: 10000; display: flex; justify-content: center; align-items: center; transition: opacity 0.8s ease-out; }
+        .cursor-blink { animation: blink 1s step-end infinite; }
+        @keyframes blink { 50% { opacity: 0; } }
+        .reveal { opacity: 0; transform: translateY(40px); transition: all 0.8s cubic-bezier(0.5, 0, 0, 1); }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+        .delay-100 { transition-delay: 100ms; } .delay-200 { transition-delay: 200ms; }
+        #chatbot-container { position: fixed; bottom: 30px; right: 30px; z-index: 9000; animation: floatBot 4s ease-in-out infinite; filter: drop-shadow(0 10px 15px rgba(0, 0, 0, 0.8)); transition: transform 0.3s ease; }
+        #chatbot-container:hover { transform: scale(1.1) translateY(-10px); }
+        @keyframes floatBot { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
+        ::-webkit-scrollbar { width: 8px; } ::-webkit-scrollbar-track { background: #050505; } ::-webkit-scrollbar-thumb { background: #00ffcc; border-radius: 4px; }
+    </style>
+</head>
+<body class="antialiased">
+
+    <div id="loader"><h1 class="text-4xl md:text-6xl font-bold text-white font-mono"><span id="typewriter-text" class="text-transparent bg-clip-text bg-gradient-to-r from-[#00ffcc] to-green-600"></span><span class="cursor-blink text-[#00ffcc]">_</span></h1></div>
+    <div id="cursor-dot"></div><div id="cursor-outline"></div>
+    <canvas id="canvas-bg"></canvas>
+
+    <nav class="fixed w-full bg-black/80 backdrop-blur-md shadow-lg z-40 border-b border-[#00ffcc]/20 transition-all duration-300 hover:border-[#00ffcc]/50 interactive-element">
+        <div class="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
+            <a href="portfolio.html" class="interactive-element transition transform hover:scale-110 hover:drop-shadow-[0_0_15px_rgba(0,255,204,0.8)] duration-300 flex items-center justify-center">
+                <img src="/static/images/logo.png" alt="Home" class="h-10 w-10 md:h-12 md:w-12 rounded-full border-2 border-[#00ffcc] shadow-[0_0_10px_rgba(0,255,204,0.4)] object-cover">
+            </a>
+            <div class="hidden md:flex space-x-4 lg:space-x-8 text-sm font-medium text-gray-400">
+                <a href="portfolio.html" class="px-3 py-2 hover:text-[#00ffcc] hover:-translate-y-1 transition transform inline-block interactive-element">Home</a>
+                <a href="about.html" class="px-3 py-2 hover:text-[#00ffcc] hover:-translate-y-1 transition transform inline-block interactive-element">About</a>
+                <a href="skills.html" class="px-3 py-2 text-[#00ffcc] -translate-y-1 transition transform inline-block interactive-element">Skills</a>
+                <a href="projects.html" class="px-3 py-2 hover:text-[#00ffcc] hover:-translate-y-1 transition transform inline-block interactive-element">Projects</a>
+                <a href="certificates.html" class="px-3 py-2 hover:text-[#00ffcc] hover:-translate-y-1 transition transform inline-block interactive-element">Certificates</a>
+            </div>
+            <a href="/static/resume/Rishank_Rastogi_Resume.pdf" target="_blank" class="px-4 py-2 border border-[#00ffcc] text-[#00ffcc] hover:bg-[#00ffcc] hover:text-black rounded transition font-mono text-sm shadow-[0_0_10px_rgba(0,255,204,0.2)] hover:shadow-[0_0_20px_rgba(0,255,204,0.6)] hover:-translate-y-1 transform interactive-element">
+                <i class="fas fa-file-pdf mr-2"></i>Resume
+            </a>
+        </div>
+    </nav>
+
+    <section class="min-h-screen pt-32 pb-20 relative z-10">
+        <div class="max-w-6xl mx-auto px-4">
+            <h1 class="text-4xl md:text-6xl font-bold mb-16 text-white text-center reveal"><span class="text-[#00ffcc] font-mono">My </span>Tech Stack</h1>
+            
+            <div class="space-y-16">
+                <div class="reveal">
+                    <h2 class="text-2xl font-mono text-[#00ffcc] mb-8 border-b border-[#00ffcc]/20 pb-2"><i class="fas fa-brain mr-3"></i>AI, ML & Data Science</h2>
+                    <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-6">
+                        
+                        <div class="group relative bg-[#0a0a0a] backdrop-blur-md border border-gray-800/80 p-6 rounded-2xl hover:border-[#3776AB] transition-all duration-500 hover:-translate-y-2 overflow-hidden interactive-element">
+                            <div class="absolute inset-0 bg-gradient-to-br from-[#3776AB]/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                            <div class="relative z-10 flex flex-col items-center justify-center">
+                                <i class="devicon-python-plain colored text-5xl mb-4 grayscale opacity-60 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-500 transform group-hover:scale-110 drop-shadow-none group-hover:drop-shadow-[0_0_15px_rgba(55,118,171,0.6)]"></i>
+                                <h3 class="text-gray-400 text-sm md:text-base font-bold group-hover:text-[#3776AB] transition-colors duration-300 tracking-wide">Python</h3>
+                            </div>
+                        </div>
+
+                        <div class="group relative bg-[#0a0a0a] backdrop-blur-md border border-gray-800/80 p-6 rounded-2xl hover:border-[#FFCA00] transition-all duration-500 hover:-translate-y-2 overflow-hidden interactive-element">
+                            <div class="absolute inset-0 bg-gradient-to-br from-[#FFCA00]/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                            <div class="relative z-10 flex flex-col items-center justify-center">
+                                <svg class="w-14 h-14 mb-4 text-gray-500 group-hover:text-white grayscale opacity-60 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-500 transform group-hover:scale-110 drop-shadow-none group-hover:drop-shadow-[0_0_15px_rgba(255,255,255,0.8)]" viewBox="0 0 100 100">
+                                    <rect x="20" y="28" width="13" height="62" fill="currentColor"/>
+                                    <rect x="42" y="10" width="13" height="25" fill="currentColor"/>
+                                    <rect x="42" y="42" width="13" height="13" fill="#FFCA00"/>
+                                    <rect x="42" y="62" width="13" height="28" fill="currentColor"/>
+                                    <rect x="64" y="28" width="13" height="25" fill="currentColor"/>
+                                    <rect x="64" y="60" width="13" height="13" fill="#E70488"/>
+                                    <rect x="64" y="80" width="13" height="10" fill="currentColor"/>
+                                    <rect x="86" y="10" width="13" height="62" fill="currentColor"/>
+                                </svg>
+                                <h3 class="text-gray-400 text-sm md:text-base font-bold group-hover:text-[#FFCA00] transition-colors duration-300 tracking-wide">Pandas</h3>
+                            </div>
+                        </div>
+
+                        <div class="group relative bg-[#0a0a0a] backdrop-blur-md border border-gray-800/80 p-6 rounded-2xl hover:border-[#4DABCF] transition-all duration-500 hover:-translate-y-2 overflow-hidden interactive-element">
+                            <div class="absolute inset-0 bg-gradient-to-br from-[#4DABCF]/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                            <div class="relative z-10 flex flex-col items-center justify-center">
+                                <i class="devicon-numpy-plain colored text-5xl mb-4 grayscale opacity-60 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-500 transform group-hover:scale-110 drop-shadow-none group-hover:drop-shadow-[0_0_15px_rgba(77,171,207,0.6)]"></i>
+                                <h3 class="text-gray-400 text-sm md:text-base font-bold group-hover:text-[#4DABCF] transition-colors duration-300 tracking-wide">NumPy</h3>
+                            </div>
+                        </div>
+
+                        <div class="group relative bg-[#0a0a0a] backdrop-blur-md border border-gray-800/80 p-6 rounded-2xl hover:border-[#F7931E] transition-all duration-500 hover:-translate-y-2 overflow-hidden interactive-element">
+                            <div class="absolute inset-0 bg-gradient-to-br from-[#F7931E]/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                            <div class="relative z-10 flex flex-col items-center justify-center">
+                                <i class="devicon-scikitlearn-plain colored text-5xl mb-4 grayscale opacity-60 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-500 transform group-hover:scale-110 drop-shadow-none group-hover:drop-shadow-[0_0_15px_rgba(247,147,30,0.6)]"></i>
+                                <h3 class="text-gray-400 text-sm md:text-base font-bold group-hover:text-[#F7931E] transition-colors duration-300 tracking-wide">Scikit-Learn</h3>
+                            </div>
+                        </div>
+
+                        <div class="group relative bg-[#0a0a0a] backdrop-blur-md border border-gray-800/80 p-6 rounded-2xl hover:border-[#5C3EE8] transition-all duration-500 hover:-translate-y-2 overflow-hidden interactive-element">
+                            <div class="absolute inset-0 bg-gradient-to-br from-[#5C3EE8]/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                            <div class="relative z-10 flex flex-col items-center justify-center">
+                                <i class="devicon-opencv-plain colored text-5xl mb-4 grayscale opacity-60 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-500 transform group-hover:scale-110 drop-shadow-none group-hover:drop-shadow-[0_0_15px_rgba(92,62,232,0.6)]"></i>
+                                <h3 class="text-gray-400 text-sm md:text-base font-bold group-hover:text-[#5C3EE8] transition-colors duration-300 tracking-wide">OpenCV</h3>
+                            </div>
+                        </div>
+
+                        <div class="group relative bg-[#0a0a0a] backdrop-blur-md border border-gray-800/80 p-6 rounded-2xl hover:border-[#FF6F00] transition-all duration-500 hover:-translate-y-2 overflow-hidden interactive-element">
+                            <div class="absolute inset-0 bg-gradient-to-br from-[#FF6F00]/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                            <div class="relative z-10 flex flex-col items-center justify-center">
+                                <i class="devicon-tensorflow-original colored text-5xl mb-4 grayscale opacity-60 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-500 transform group-hover:scale-110 drop-shadow-none group-hover:drop-shadow-[0_0_15px_rgba(255,111,0,0.6)]"></i>
+                                <h3 class="text-gray-400 text-sm md:text-base font-bold group-hover:text-[#FF6F00] transition-colors duration-300 tracking-wide">TensorFlow</h3>
+                            </div>
+                        </div>
+
+                        <div class="group relative bg-[#0a0a0a] backdrop-blur-md border border-gray-800/80 p-6 rounded-2xl hover:border-[#EE4C2C] transition-all duration-500 hover:-translate-y-2 overflow-hidden interactive-element">
+                            <div class="absolute inset-0 bg-gradient-to-br from-[#EE4C2C]/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                            <div class="relative z-10 flex flex-col items-center justify-center">
+                                <i class="devicon-pytorch-original colored text-5xl mb-4 grayscale opacity-60 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-500 transform group-hover:scale-110 drop-shadow-none group-hover:drop-shadow-[0_0_15px_rgba(238,76,44,0.6)]"></i>
+                                <h3 class="text-gray-400 text-sm md:text-base font-bold group-hover:text-[#EE4C2C] transition-colors duration-300 tracking-wide">PyTorch</h3>
+                            </div>
+                        </div>
+
+                        <div class="group relative bg-[#0a0a0a] backdrop-blur-md border border-gray-800/80 p-6 rounded-2xl hover:border-[#3888b5] transition-all duration-500 hover:-translate-y-2 overflow-hidden interactive-element">
+                            <div class="absolute inset-0 bg-gradient-to-br from-[#3888b5]/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                            <div class="relative z-10 flex flex-col items-center justify-center">
+                                <i class="devicon-matplotlib-plain colored text-5xl mb-4 grayscale opacity-60 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-500 transform group-hover:scale-110 drop-shadow-none group-hover:drop-shadow-[0_0_15px_rgba(56,136,181,0.6)]"></i>
+                                <h3 class="text-gray-400 text-sm md:text-base font-bold group-hover:text-[#3888b5] transition-colors duration-300 tracking-wide">Matplotlib</h3>
+                            </div>
+                        </div>
+
+                        <div class="group relative bg-[#0a0a0a] backdrop-blur-md border border-gray-800/80 p-6 rounded-2xl hover:border-[#0054A6] transition-all duration-500 hover:-translate-y-2 overflow-hidden interactive-element">
+                            <div class="absolute inset-0 bg-gradient-to-br from-[#0054A6]/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                            <div class="relative z-10 flex flex-col items-center justify-center">
+                                <i class="fas fa-flask text-5xl mb-4 text-gray-500 opacity-60 group-hover:text-[#0054A6] group-hover:opacity-100 transition-all duration-500 transform group-hover:scale-110 drop-shadow-none group-hover:drop-shadow-[0_0_15px_rgba(0,84,166,0.6)]"></i>
+                                <h3 class="text-gray-400 text-sm md:text-base font-bold group-hover:text-[#0054A6] transition-colors duration-300 tracking-wide">SciPy</h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="reveal delay-100">
+                    <h2 class="text-2xl font-mono text-[#00ffcc] mb-8 border-b border-[#00ffcc]/20 pb-2"><i class="fas fa-code mr-3"></i>Web & Core Languages</h2>
+                    <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-6">
+                        
+                        <div class="group relative bg-[#0a0a0a] backdrop-blur-md border border-gray-800/80 p-6 rounded-2xl hover:border-[#E34F26] transition-all duration-500 hover:-translate-y-2 overflow-hidden interactive-element">
+                            <div class="absolute inset-0 bg-gradient-to-br from-[#E34F26]/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                            <div class="relative z-10 flex flex-col items-center justify-center">
+                                <i class="devicon-html5-plain colored text-5xl mb-4 grayscale opacity-60 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-500 transform group-hover:scale-110 drop-shadow-none group-hover:drop-shadow-[0_0_15px_rgba(227,79,38,0.6)]"></i>
+                                <h3 class="text-gray-400 text-sm md:text-base font-bold group-hover:text-[#E34F26] transition-colors duration-300 tracking-wide">HTML5</h3>
+                            </div>
+                        </div>
+
+                        <div class="group relative bg-[#0a0a0a] backdrop-blur-md border border-gray-800/80 p-6 rounded-2xl hover:border-[#1572B6] transition-all duration-500 hover:-translate-y-2 overflow-hidden interactive-element">
+                            <div class="absolute inset-0 bg-gradient-to-br from-[#1572B6]/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                            <div class="relative z-10 flex flex-col items-center justify-center">
+                                <i class="devicon-css3-plain colored text-5xl mb-4 grayscale opacity-60 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-500 transform group-hover:scale-110 drop-shadow-none group-hover:drop-shadow-[0_0_15px_rgba(21,114,182,0.6)]"></i>
+                                <h3 class="text-gray-400 text-sm md:text-base font-bold group-hover:text-[#1572B6] transition-colors duration-300 tracking-wide">CSS3</h3>
+                            </div>
+                        </div>
+
+                        <div class="group relative bg-[#0a0a0a] backdrop-blur-md border border-gray-800/80 p-6 rounded-2xl hover:border-[#F7DF1E] transition-all duration-500 hover:-translate-y-2 overflow-hidden interactive-element">
+                            <div class="absolute inset-0 bg-gradient-to-br from-[#F7DF1E]/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                            <div class="relative z-10 flex flex-col items-center justify-center">
+                                <i class="devicon-javascript-plain colored text-5xl mb-4 grayscale opacity-60 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-500 transform group-hover:scale-110 drop-shadow-none group-hover:drop-shadow-[0_0_15px_rgba(247,223,30,0.6)]"></i>
+                                <h3 class="text-gray-400 text-sm md:text-base font-bold group-hover:text-[#F7DF1E] transition-colors duration-300 tracking-wide">JavaScript</h3>
+                            </div>
+                        </div>
+
+                        <div class="group relative bg-[#0a0a0a] backdrop-blur-md border border-gray-800/80 p-6 rounded-2xl hover:border-[#00599C] transition-all duration-500 hover:-translate-y-2 overflow-hidden interactive-element">
+                            <div class="absolute inset-0 bg-gradient-to-br from-[#00599C]/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                            <div class="relative z-10 flex flex-col items-center justify-center">
+                                <i class="devicon-cplusplus-plain colored text-5xl mb-4 grayscale opacity-60 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-500 transform group-hover:scale-110 drop-shadow-none group-hover:drop-shadow-[0_0_15px_rgba(0,89,156,0.6)]"></i>
+                                <h3 class="text-gray-400 text-sm md:text-base font-bold group-hover:text-[#00599C] transition-colors duration-300 tracking-wide">C / C++</h3>
+                            </div>
+                        </div>
+
+                        <div class="group relative bg-[#0a0a0a] backdrop-blur-md border border-gray-800/80 p-6 rounded-2xl hover:border-[#44B78B] transition-all duration-500 hover:-translate-y-2 overflow-hidden interactive-element">
+                            <div class="absolute inset-0 bg-gradient-to-br from-[#44B78B]/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                            <div class="relative z-10 flex flex-col items-center justify-center">
+                                <i class="devicon-django-plain colored text-5xl mb-4 grayscale opacity-60 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-500 transform group-hover:scale-110 drop-shadow-none group-hover:drop-shadow-[0_0_15px_rgba(68,183,139,0.6)]"></i>
+                                <h3 class="text-gray-400 text-sm md:text-base font-bold group-hover:text-[#44B78B] transition-colors duration-300 tracking-wide">Django</h3>
+                            </div>
+                        </div>
+
+                        <div class="group relative bg-[#0a0a0a] backdrop-blur-md border border-gray-800/80 p-6 rounded-2xl hover:border-[#ffffff] transition-all duration-500 hover:-translate-y-2 overflow-hidden interactive-element">
+                            <div class="absolute inset-0 bg-gradient-to-br from-[#ffffff]/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                            <div class="relative z-10 flex flex-col items-center justify-center">
+                                <i class="devicon-flask-original text-5xl mb-4 opacity-40 group-hover:opacity-100 transition-all duration-500 transform group-hover:scale-110 drop-shadow-none group-hover:drop-shadow-[0_0_15px_rgba(255,255,255,0.6)]"></i>
+                                <h3 class="text-gray-400 text-sm md:text-base font-bold group-hover:text-[#ffffff] transition-colors duration-300 tracking-wide">Flask</h3>
+                            </div>
+                        </div>
+
+                        <div class="group relative bg-[#0a0a0a] backdrop-blur-md border border-gray-800/80 p-6 rounded-2xl hover:border-[#E48E00] transition-all duration-500 hover:-translate-y-2 overflow-hidden interactive-element">
+                            <div class="absolute inset-0 bg-gradient-to-br from-[#E48E00]/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                            <div class="relative z-10 flex flex-col items-center justify-center">
+                                <i class="devicon-mysql-plain colored text-5xl mb-4 grayscale opacity-60 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-500 transform group-hover:scale-110 drop-shadow-none group-hover:drop-shadow-[0_0_15px_rgba(228,142,0,0.6)]"></i>
+                                <h3 class="text-gray-400 text-sm md:text-base font-bold group-hover:text-[#E48E00] transition-colors duration-300 tracking-wide">MySQL</h3>
+                            </div>
+                        </div>
+
+                        <div class="group relative bg-[#0a0a0a] backdrop-blur-md border border-gray-800/80 p-6 rounded-2xl hover:border-[#02569B] transition-all duration-500 hover:-translate-y-2 overflow-hidden interactive-element">
+                            <div class="absolute inset-0 bg-gradient-to-br from-[#02569B]/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                            <div class="relative z-10 flex flex-col items-center justify-center">
+                                <i class="devicon-flutter-plain colored text-5xl mb-4 grayscale opacity-60 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-500 transform group-hover:scale-110 drop-shadow-none group-hover:drop-shadow-[0_0_15px_rgba(2,86,155,0.6)]"></i>
+                                <h3 class="text-gray-400 text-sm md:text-base font-bold group-hover:text-[#02569B] transition-colors duration-300 tracking-wide">Flutter</h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="reveal delay-200">
+                    <h2 class="text-2xl font-mono text-[#00ffcc] mb-8 border-b border-[#00ffcc]/20 pb-2"><i class="fas fa-tools mr-3"></i>Tools & Environments</h2>
+                    <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-6">
+                        
+                        <div class="group relative bg-[#0a0a0a] backdrop-blur-md border border-gray-800/80 p-6 rounded-2xl hover:border-[#007ACC] transition-all duration-500 hover:-translate-y-2 overflow-hidden interactive-element">
+                            <div class="absolute inset-0 bg-gradient-to-br from-[#007ACC]/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                            <div class="relative z-10 flex flex-col items-center justify-center">
+                                <i class="devicon-vscode-plain colored text-5xl mb-4 grayscale opacity-60 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-500 transform group-hover:scale-110 drop-shadow-none group-hover:drop-shadow-[0_0_15px_rgba(0,122,204,0.6)]"></i>
+                                <h3 class="text-gray-400 text-sm md:text-base font-bold group-hover:text-[#007ACC] transition-colors duration-300 tracking-wide">VS Code</h3>
+                            </div>
+                        </div>
+
+                        <div class="group relative bg-[#0a0a0a] backdrop-blur-md border border-gray-800/80 p-6 rounded-2xl hover:border-[#21D789] transition-all duration-500 hover:-translate-y-2 overflow-hidden interactive-element">
+                            <div class="absolute inset-0 bg-gradient-to-br from-[#21D789]/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                            <div class="relative z-10 flex flex-col items-center justify-center">
+                                <i class="devicon-pycharm-plain colored text-5xl mb-4 grayscale opacity-60 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-500 transform group-hover:scale-110 drop-shadow-none group-hover:drop-shadow-[0_0_15px_rgba(33,215,137,0.6)]"></i>
+                                <h3 class="text-gray-400 text-sm md:text-base font-bold group-hover:text-[#21D789] transition-colors duration-300 tracking-wide">PyCharm</h3>
+                            </div>
+                        </div>
+
+                        <div class="group relative bg-[#0a0a0a] backdrop-blur-md border border-gray-800/80 p-6 rounded-2xl hover:border-[#44A833] transition-all duration-500 hover:-translate-y-2 overflow-hidden interactive-element">
+                            <div class="absolute inset-0 bg-gradient-to-br from-[#44A833]/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                            <div class="relative z-10 flex flex-col items-center justify-center">
+                                <i class="devicon-anaconda-original colored text-5xl mb-4 grayscale opacity-60 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-500 transform group-hover:scale-110 drop-shadow-none group-hover:drop-shadow-[0_0_15px_rgba(68,168,51,0.6)]"></i>
+                                <h3 class="text-gray-400 text-sm md:text-base font-bold group-hover:text-[#44A833] transition-colors duration-300 tracking-wide">Anaconda</h3>
+                            </div>
+                        </div>
+
+                        <div class="group relative bg-[#0a0a0a] backdrop-blur-md border border-gray-800/80 p-6 rounded-2xl hover:border-[#F37626] transition-all duration-500 hover:-translate-y-2 overflow-hidden interactive-element">
+                            <div class="absolute inset-0 bg-gradient-to-br from-[#F37626]/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                            <div class="relative z-10 flex flex-col items-center justify-center">
+                                <i class="devicon-jupyter-plain colored text-5xl mb-4 grayscale opacity-60 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-500 transform group-hover:scale-110 drop-shadow-none group-hover:drop-shadow-[0_0_15px_rgba(243,118,38,0.6)]"></i>
+                                <h3 class="text-gray-400 text-sm md:text-base font-bold group-hover:text-[#F37626] transition-colors duration-300 tracking-wide">Jupyter</h3>
+                            </div>
+                        </div>
+
+                        <div class="group relative bg-[#0a0a0a] backdrop-blur-md border border-gray-800/80 p-6 rounded-2xl hover:border-[#ffffff] transition-all duration-500 hover:-translate-y-2 overflow-hidden interactive-element">
+                            <div class="absolute inset-0 bg-gradient-to-br from-[#ffffff]/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                            <div class="relative z-10 flex flex-col items-center justify-center">
+                                <i class="devicon-github-original text-5xl mb-4 opacity-40 group-hover:opacity-100 transition-all duration-500 transform group-hover:scale-110 drop-shadow-none group-hover:drop-shadow-[0_0_15px_rgba(255,255,255,0.6)]"></i>
+                                <h3 class="text-gray-400 text-sm md:text-base font-bold group-hover:text-[#ffffff] transition-colors duration-300 tracking-wide">GitHub</h3>
+                            </div>
+                        </div>
+
+                        <div class="group relative bg-[#0a0a0a] backdrop-blur-md border border-gray-800/80 p-6 rounded-2xl hover:border-[#F24E1E] transition-all duration-500 hover:-translate-y-2 overflow-hidden interactive-element">
+                            <div class="absolute inset-0 bg-gradient-to-br from-[#F24E1E]/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                            <div class="relative z-10 flex flex-col items-center justify-center">
+                                <i class="devicon-figma-plain colored text-5xl mb-4 grayscale opacity-60 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-500 transform group-hover:scale-110 drop-shadow-none group-hover:drop-shadow-[0_0_15px_rgba(242,78,30,0.6)]"></i>
+                                <h3 class="text-gray-400 text-sm md:text-base font-bold group-hover:text-[#F24E1E] transition-colors duration-300 tracking-wide">Figma</h3>
+                            </div>
+                        </div>
+
+                        <div class="group relative bg-[#0a0a0a] backdrop-blur-md border border-gray-800/80 p-6 rounded-2xl hover:border-[#FFD21E] transition-all duration-500 hover:-translate-y-2 overflow-hidden interactive-element">
+                            <div class="absolute inset-0 bg-gradient-to-br from-[#FFD21E]/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                            <div class="relative z-10 flex flex-col items-center justify-center">
+                                <i class="fas fa-robot text-5xl mb-4 text-gray-500 opacity-60 group-hover:text-[#FFD21E] group-hover:opacity-100 transition-all duration-500 transform group-hover:scale-110 drop-shadow-none group-hover:drop-shadow-[0_0_15px_rgba(255,210,30,0.6)]"></i>
+                                <h3 class="text-gray-400 text-sm md:text-base font-bold group-hover:text-[#FFD21E] transition-colors duration-300 tracking-wide">Hugging Face</h3>
+                            </div>
+                        </div>
+
+                        <div class="group relative bg-[#0a0a0a] backdrop-blur-md border border-gray-800/80 p-6 rounded-2xl hover:border-[#FF4B4B] transition-all duration-500 hover:-translate-y-2 overflow-hidden interactive-element">
+                            <div class="absolute inset-0 bg-gradient-to-br from-[#FF4B4B]/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                            <div class="relative z-10 flex flex-col items-center justify-center">
+                                <i class="devicon-streamlit-plain colored text-5xl mb-4 grayscale opacity-60 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-500 transform group-hover:scale-110 drop-shadow-none group-hover:drop-shadow-[0_0_15px_rgba(255,75,75,0.6)]"></i>
+                                <h3 class="text-gray-400 text-sm md:text-base font-bold group-hover:text-[#FF4B4B] transition-colors duration-300 tracking-wide">Streamlit</h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-black py-10 border-t border-[#00ffcc]/20 z-10 relative">
+        <div class="max-w-4xl mx-auto px-4 flex flex-col md:flex-row justify-center items-center gap-8 md:gap-16">
+            <a href="https://linkedin.com/in/rishank-rastogi" target="_blank" class="flex items-center gap-4 group interactive-element">
+                <span class="font-mono text-gray-400 group-hover:text-white transition duration-300 tracking-widest uppercase text-sm">Let's Connect</span>
+                <i class="fab fa-linkedin text-3xl text-gray-600 group-hover:text-[#1592eb] transform group-hover:scale-110 transition-all duration-300 drop-shadow-[0_0_0px_rgba(0,255,204,0)] group-hover:drop-shadow-[0_0_15px_rgba(0,255,204,0.6)]"></i>
+            </a>
+            <div class="hidden md:block w-px h-10 bg-gray-800"></div>
+            <a href="https://github.com/rishank012" target="_blank" class="flex items-center gap-4 group interactive-element">
+                <span class="font-mono text-gray-400 group-hover:text-white transition duration-300 tracking-widest uppercase text-sm">Star me on GitHub</span>
+                <i class="fab fa-github text-3xl text-gray-600 group-hover:text-white transform group-hover:scale-110 transition-all duration-300 drop-shadow-[0_0_0px_rgba(255,255,255,0)] group-hover:drop-shadow-[0_0_15px_rgba(255,255,255,0.6)]"></i>
+            </a>
+            <div class="hidden md:block w-px h-10 bg-gray-800"></div>
+            <p class="text-gray-500 font-mono text-sm hover:text-[#00ffcc] transition duration-300">&copy; Rishank Rastogi. Let's build for the Future.</p>
+        </div>
+    </footer>
+
+    <div id="chatbot-container" class="interactive-element" title="Edith Rishank's AI Potfolio Assistant">
+        <div id="bot-notification" class="absolute bottom-[100%] right-4 mb-4 w-56 bg-gray-900 border border-[#00ffcc] text-[#00ffcc] text-sm p-3 rounded-lg shadow-[0_0_15px_rgba(0,255,204,0.3)] opacity-0 pointer-events-none transition-opacity duration-500 font-mono">
+            <p>Hi, I am Edith!! An Ai Portfolio Assistant. Here, you can ask me anything about Rishank.</p>
+            <div class="absolute -bottom-2 right-8 w-4 h-4 bg-gray-900 border-b border-r border-[#00ffcc] transform rotate-45"></div>
+        </div>
+        <svg width="100" height="120" viewBox="0 0 120 140"><path d="M 30 85 L 15 115" stroke="#f1f5f9" stroke-width="12" stroke-linecap="round" /><path d="M 90 85 L 105 115" stroke="#f1f5f9" stroke-width="12" stroke-linecap="round" /><path d="M 26 90 L 19 105" stroke="#3b82f6" stroke-width="14" stroke-linecap="round" /><path d="M 94 90 L 101 105" stroke="#3b82f6" stroke-width="14" stroke-linecap="round" /><path d="M 35 70 C 20 130, 100 130, 85 70 Z" fill="#f8fafc" /><circle cx="60" cy="95" r="14" fill="#1e293b" stroke="#3b82f6" stroke-width="3" /><circle cx="60" cy="95" r="6" fill="#06b6d4" style="filter: drop-shadow(0 0 6px #06b6d4);" /><rect x="25" y="15" width="70" height="50" rx="25" fill="#f8fafc" /><path d="M 25 30 C 15 30, 15 55, 25 55" fill="#3b82f6" /><path d="M 95 30 C 105 30, 105 55, 95 55" fill="#3b82f6" /><rect x="32" y="22" width="56" height="36" rx="12" fill="#0f172a" /><circle cx="45" cy="35" r="5" fill="#00ffcc" class="bot-eye" id="eye-left" style="filter: drop-shadow(0 0 6px #00ffcc);" /><circle cx="75" cy="35" r="5" fill="#00ffcc" class="bot-eye" id="eye-right" style="filter: drop-shadow(0 0 6px #00ffcc);" /><path d="M 55 45 Q 60 50 65 45" stroke="#00ffcc" stroke-width="3" stroke-linecap="round" fill="none" style="filter: drop-shadow(0 0 4px #00ffcc);"/></svg>
+    </div>
+
+    <div id="chatbot-window" class="fixed bottom-36 right-8 w-80 md:w-96 h-[30rem] bg-gray-900 border-2 border-[#00ffcc] rounded-xl shadow-[0_0_30px_rgba(0,255,204,0.2)] flex flex-col z-[9500] transform scale-0 origin-bottom-right transition-transform duration-300">
+        <div class="p-4 bg-black border-b border-[#00ffcc]/30 flex justify-between items-center rounded-t-xl"><div class="flex items-center gap-3"><div class="w-8 h-8 rounded-full bg-[#00ffcc]/20 flex items-center justify-center border border-[#00ffcc]"><i class="fas fa-robot text-[#00ffcc]"></i></div><h3 class="text-white font-mono font-bold">Edith</h3></div><button id="close-chat" class="text-gray-400 hover:text-[#00ffcc] transition interactive-element"><i class="fas fa-times text-xl"></i></button></div>
+        <div id="chat-messages" class="flex-1 p-4 overflow-y-auto font-mono text-sm space-y-4"><div class="flex gap-2"><div class="w-6 h-6 mt-1 rounded-full bg-[#00ffcc]/20 flex-shrink-0 flex items-center justify-center border border-[#00ffcc]"><i class="fas fa-robot text-[#00ffcc] text-[10px]"></i></div><div class="bg-gray-800 text-gray-200 p-3 rounded-lg rounded-tl-none border border-gray-700 max-w-[80%] shadow-md">Hi, I am Edith, Rishank's AI Portfolio Assistant. How can I help you Today?</div></div></div>
+        <div class="p-4 bg-black border-t border-[#00ffcc]/30 rounded-b-xl flex gap-2"><input type="text" id="chat-input" placeholder="Ask Edith..." class="flex-1 bg-gray-800 border border-gray-700 rounded text-white px-3 py-2 focus:outline-none focus:border-[#00ffcc] font-mono text-sm transition interactive-element" autocomplete="off"><button id="send-btn" class="bg-transparent border border-[#00ffcc] text-[#00ffcc] px-4 py-2 rounded hover:bg-[#00ffcc] hover:text-black transition interactive-element font-bold"><i class="fas fa-paper-plane"></i></button></div>
+    </div>
+
+    <script>
+        const cursorDot = document.getElementById('cursor-dot'); const cursorOutline = document.getElementById('cursor-outline'); let mouseX = window.innerWidth / 2; let mouseY = window.innerHeight / 2; let outlineX = mouseX; let outlineY = mouseY; window.addEventListener('mousemove', (e) => { mouseX = e.clientX; mouseY = e.clientY; cursorDot.style.left = `${mouseX}px`; cursorDot.style.top = `${mouseY}px`; }); function animateCursor() { let easing = 0.4; outlineX += (mouseX - outlineX) * easing; outlineY += (mouseY - outlineY) * easing; cursorOutline.style.left = `${outlineX}px`; cursorOutline.style.top = `${outlineY}px`; requestAnimationFrame(animateCursor); } animateCursor();
+        document.querySelectorAll('a, button, .interactive-element').forEach(el => { el.addEventListener('mouseenter', () => cursorOutline.classList.add('hover-active')); el.addEventListener('mouseleave', () => cursorOutline.classList.remove('hover-active')); });
+        
+        window.addEventListener('scroll', () => { const elUnderCursor = document.elementFromPoint(mouseX, mouseY); if (elUnderCursor && (elUnderCursor.matches('a, button, .interactive-element') || elUnderCursor.closest('a, button, .interactive-element'))) { cursorOutline.classList.add('hover-active'); } else { cursorOutline.classList.remove('hover-active'); } });
+
+        function reveal() { var reveals = document.querySelectorAll(".reveal"); for (var i = 0; i < reveals.length; i++) { var windowHeight = window.innerHeight; var elementTop = reveals[i].getBoundingClientRect().top; var elementBottom = reveals[i].getBoundingClientRect().bottom; var elementVisible = 100; if (elementTop < windowHeight - elementVisible && elementBottom > elementVisible) { reveals[i].classList.add("active"); } else { reveals[i].classList.remove("active"); } } } window.addEventListener("scroll", reveal); reveal();
+        const nameText = "Please Wait..."; let textIndex = 0; const typeTarget = document.getElementById("typewriter-text"); const loader = document.getElementById("loader"); function typeWriter() { if (textIndex < nameText.length) { typeTarget.innerHTML += nameText.charAt(textIndex); textIndex++; setTimeout(typeWriter, 60); } else { setTimeout(() => { loader.style.opacity = '0'; setTimeout(() => loader.style.display = 'none', 600); }, 600); } } window.onload = typeWriter;
+        const eyeLeft = document.getElementById('eye-left'); const eyeRight = document.getElementById('eye-right'); const botContainer = document.getElementById('chatbot-container'); document.addEventListener('mousemove', () => { const rect = botContainer.getBoundingClientRect(); const botX = rect.left + rect.width / 2; const botY = rect.top + rect.height / 2; const angle = Math.atan2(mouseY - botY, mouseX - botX); const moveX = Math.cos(angle) * 4; const moveY = Math.sin(angle) * 4; eyeLeft.style.transform = `translate(${moveX}px, ${moveY}px)`; eyeRight.style.transform = `translate(${moveX}px, ${moveY}px)`; });
+        const canvas = document.getElementById('canvas-bg'); const ctx = canvas.getContext('2d'); let width, height, particles; function resize() { width = canvas.width = window.innerWidth; height = canvas.height = window.innerHeight; } window.addEventListener('resize', resize); resize(); class Particle { constructor() { this.x = Math.random() * width; this.y = Math.random() * height; this.size = Math.random() * 1.5 + 0.5; this.vx = (Math.random() - 0.5) * 0.5; this.vy = (Math.random() - 0.5) * 0.5; } draw() { ctx.fillStyle = '#00ffcc'; ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2); ctx.closePath(); ctx.fill(); } update() { this.x += this.vx; this.y += this.vy; if (this.x < 0 || this.x > width) this.vx = -this.vx; if (this.y < 0 || this.y > height) this.vy = -this.vy; let dx = mouseX - this.x; let dy = mouseY - this.y; let dist = Math.sqrt(dx * dx + dy * dy); if (dist < 120) { const force = (120 - dist) / 120; this.x -= (dx / dist) * force * 2; this.y -= (dy / dist) * force * 2; } } } function initParticles() { particles = []; let num = (width * height) / 12000; for (let i = 0; i < num; i++) particles.push(new Particle()); } function animateParticles() { ctx.clearRect(0, 0, width, height); for (let i = 0; i < particles.length; i++) { particles[i].update(); particles[i].draw(); for (let j = i; j < particles.length; j++) { let dx = particles[i].x - particles[j].x; let dy = particles[i].y - particles[j].y; let dist = dx * dx + dy * dy; if (dist < 10000) { ctx.strokeStyle = `rgba(0, 255, 204, ${(1 - dist / 10000) * 0.3})`; ctx.lineWidth = 0.5; ctx.beginPath(); ctx.moveTo(particles[i].x, particles[i].y); ctx.lineTo(particles[j].x, particles[j].y); ctx.stroke(); } } } requestAnimationFrame(animateParticles); } initParticles(); animateParticles();
+        const chatWindow = document.getElementById('chatbot-window'); const closeChatBtn = document.getElementById('close-chat'); const botNotification = document.getElementById('bot-notification'); let isChatOpen = false; botContainer.addEventListener('click', () => { isChatOpen = !isChatOpen; if(isChatOpen) { chatWindow.classList.remove('scale-0'); chatWindow.classList.add('scale-100'); botNotification.style.opacity = '0'; } else { chatWindow.classList.remove('scale-100'); chatWindow.classList.add('scale-0'); } }); closeChatBtn.addEventListener('click', (e) => { e.stopPropagation(); isChatOpen = false; chatWindow.classList.remove('scale-100'); chatWindow.classList.add('scale-0'); }); function triggerBotNotification() { if (!isChatOpen) { botNotification.style.opacity = '1'; setTimeout(() => { botNotification.style.opacity = '0'; }, 6000); } } setTimeout(triggerBotNotification, 5000); setInterval(triggerBotNotification, 20000);
+        const chatInput = document.getElementById('chat-input'); 
+        const sendBtn = document.getElementById('send-btn'); 
+        const chatMessages = document.getElementById('chat-messages'); 
+        let conversationHistory = []; 
+
+        async function sendMessage() { 
+        const msg = chatInput.value.trim(); 
+            if (!msg) return; 
+            appendMessage('user', msg); 
+            chatInput.value = ''; 
+            const loadingId = 'loading-' + Date.now(); 
+            appendMessage('bot', 'Typing...', loadingId); 
+            conversationHistory.push({ role: "user", parts: [{ text: msg }] }); 
+    
+    try { 
+        // Calling your secure Flask backend instead of Google directly
+        const res = await fetch(`/api/chat`, { 
+            method: 'POST', 
+            headers: { 'Content-Type': 'application/json' }, 
+            body: JSON.stringify({ contents: conversationHistory }) 
+        }); 
+        const data = await res.json(); 
+        document.getElementById(loadingId).remove(); 
+        
+        if (data.candidates && data.candidates.length > 0) { 
+            const botReply = data.candidates[0].content.parts[0].text; 
+            appendMessage('bot', botReply); 
+            conversationHistory.push({ role: "model", parts: [{ text: botReply }] }); 
+        } else { 
+            appendMessage('bot', "System Error."); 
+        } 
+    } catch (err) { 
+        document.getElementById(loadingId).remove(); 
+        appendMessage('bot', "Connection Error."); 
+    } 
+} 
+
+function appendMessage(sender, text, id = null) { 
+    const div = document.createElement('div'); 
+    div.className = sender === 'bot' ? 'flex gap-2' : 'flex gap-2 justify-end'; 
+    if (id) div.id = id; 
+    div.innerHTML = sender === 'bot' ? `<div class="w-6 h-6 mt-1 rounded-full bg-[#00ffcc]/20 flex-shrink-0 flex items-center justify-center border border-[#00ffcc]"><i class="fas fa-robot text-[#00ffcc] text-[10px]"></i></div><div class="bg-gray-800 text-gray-200 p-3 rounded-lg rounded-tl-none border border-gray-700 max-w-[80%] shadow-md whitespace-pre-wrap">${text}</div>` : `<div class="bg-[#00ffcc]/20 text-[#00ffcc] p-3 rounded-lg rounded-tr-none border border-[#00ffcc]/50 max-w-[80%] shadow-md whitespace-pre-wrap">${text}</div>`; 
+    chatMessages.appendChild(div); 
+    chatMessages.scrollTop = chatMessages.scrollHeight; 
+} 
+
+sendBtn.addEventListener('click', sendMessage); 
+chatInput.addEventListener('keypress', (e) => { if (e.key === 'Enter') sendMessage(); });
+        </script>
+</body>
+</html>
